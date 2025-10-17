@@ -12,7 +12,7 @@ translateBtn.addEventListener("click", async () => {
   if (!text) {
     output.textContent = "Por favor introduce un texto para traducir...";
   }
-  if (sourceLang === targetLang) {
+  if (sourceLang.value === targetLang.value) {
     output.textContent = "Elige dos idiomas diferentes";
     return;
   }
@@ -26,12 +26,12 @@ translateBtn.addEventListener("click", async () => {
   try {
     if (
       !translator ||
-      translator.sourceLanguage !== sourceLang ||
-      translator.targetLanguage !== targetLang
+      translator.sourceLanguage !== sourceLang.value ||
+      translator.targetLanguage !== targetLang.value
     ) {
-      const disponible = await translator.availability({
-        sourceLang,
-        targetLang,
+      const disponible = await Translator.availability({
+        sourceLanguage: sourceLang.value,
+        targetLanguage: targetLang.value,
       });
 
       if (disponible === "unavailable") {
@@ -39,9 +39,9 @@ translateBtn.addEventListener("click", async () => {
         return;
       }
 
-      translator = await translator.create({
-        sourceLang,
-        targetLang,
+      translator = await Translator.create({
+        sourceLanguage: sourceLang.value,
+        targetLanguage: targetLang.value,
         monitor(m) {
           m.addEventListener("downloadprogress", (e) => {
             output.textContent =
@@ -50,14 +50,14 @@ translateBtn.addEventListener("click", async () => {
         },
       });
 
-      if (translator.ready) await translator.ready;
+      await translator.ready;
     }
 
     output.textContent = "Traduciendo...🌟";
 
     const translated = await translator.translate(text);
     output.textContent = translated;
-  } catch {
+  } catch (error) {
     output.textContent = "Error al traducir...";
     console.log(error);
   }
