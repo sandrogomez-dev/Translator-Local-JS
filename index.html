@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="main.js" defer></script>
+    <title>Traductor con IA</title>
+  </head>
+  <body>
+    <h1>🌐 Traductor Multilenguaje</h1>
+
+    <textarea
+      id="textInput"
+      placeholder="Escribe aqui el texto a traducir..."
+    ></textarea>
+
+    <div class="selectors">
+      <div class="selector-item">
+        <label for="sourceLang">Idioma origen:</label>
+        <select id="sourceLang">
+          <option value="es">Espanol</option>
+          <option value="en">Ingles</option>
+          <option value="pt">Portugues</option>
+          <option value="it">Italiano</option>
+        </select>
+      </div>
+      <div class="selector-item">
+        <label for="targetLang">Idioma destino:</label>
+        <select id="targetLang">
+          <option value="es">Espanol</option>
+          <option value="en">Ingles</option>
+          <option value="pt">Portugues</option>
+          <option value="it">Italiano</option>
+        </select>
+      </div>
+    </div>
+
+    <button id="translate">Traducir 🏳️</button>
+
+    <section id="output">Esperando traduccion... ⏱️</section>
+  </body>
+</html>
